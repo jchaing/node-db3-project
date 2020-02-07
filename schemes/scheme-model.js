@@ -34,8 +34,11 @@ function remove(id) {
     .del();
 }
 
-function addStep(step, scheme_id) {
-
+function addStep(stepData, id) {
+  return db('steps as st')
+    // .join('schemes as sc', 'sc.id', 'st.scheme_id')
+    .insert({ ...stepData, scheme_id: id })
+    .where({ scheme_id: id });
 }
 
 module.exports = {
